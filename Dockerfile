@@ -1,4 +1,12 @@
-FROM eclipse-temurin:8-jdk
-EXPOSE 80
-COPY target/devops-integration.jar devops-integration.jar
-ENTRYPOINT ["java","-jar","/devops-integration.jar"]
+FROM maven:3.8.6-eclipse-temurin-8
+
+WORKDIR /app
+
+COPY . /app
+
+RUN mvn clean package -DskipTests
+
+EXPOSE 8080
+
+CMD ["java","-jar","target/*.jar"]
+Idhi run chey dockerfile lo
